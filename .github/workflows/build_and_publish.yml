@@ -1,0 +1,24 @@
+name: Build and Publish
+on:
+  workflow_call: {}
+  push:
+    branches: [master]
+env:
+  NPM_ACCESS_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+jobs:
+  buildPublish:
+    name: Build and push docker image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: 'Get latest package version'
+        id: 'getVersion'
+        run: echo "message=$(jq -r '.version' < sheetjs/package.json)" >> $GITHUB_OUTPUT
+      - run: ./build.sh
+      - run: ./publish.sh
+      - run: git submodule foreach --recursive git reset --hard
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Publish ${{ steps.getVersion.outputs.message }}'

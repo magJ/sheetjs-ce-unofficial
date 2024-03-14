@@ -1,0 +1,3 @@
+[submodule "sheetjs"]
+	path = sheetjs
+	url = https://git.sheetjs.com/sheetjs/sheetjs/
