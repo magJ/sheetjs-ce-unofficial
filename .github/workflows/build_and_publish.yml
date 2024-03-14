@@ -23,9 +23,8 @@ jobs:
         run: echo "message=$(jq -r '.version' < sheetjs/package.json)" >> $GITHUB_OUTPUT
       - run: ./build.sh
       - run: ./publish.sh
-        with:
-          env:
-            NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
       - run: git submodule foreach --recursive git reset --hard
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
