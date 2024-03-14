@@ -20,5 +20,5 @@ fi
 echo "$source_version" > latest_published.txt
 
 cd sheetjs
-npm publish --dry-run
+npm publish
 cd ..
