@@ -15,6 +15,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: 'true'
+      - run: sudo apt-get install -y pkgdiff
       - name: 'Get latest package version'
         id: 'getVersion'
         run: echo "message=$(jq -r '.version' < sheetjs/package.json)" >> $GITHUB_OUTPUT
