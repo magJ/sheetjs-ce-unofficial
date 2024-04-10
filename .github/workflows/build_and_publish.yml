@@ -24,5 +24,8 @@ jobs:
           echo "package_json_version=$(jq -r '.version' < sheetjs/package.json)" >> $GITHUB_OUTPUT
           echo "latest_published_version=$(cat latest_published.txt)" >> $GITHUB_OUTPUT
       - run: ./build.sh
-        if: steps.getVersion.outputs.package_json_version != steps.getLatestPublishedVersion.outputs.latest_published_version
+        env:
+          MEH: ${{ steps.getVersion.outputs.package_json_version }}
+          MEH1: ${{ steps.getVersion.outputs.latest_published_version }}
+        if: steps.getVersion.outputs.package_json_version != steps.getVersion.outputs.latest_published_version
       - run: echo "test"
