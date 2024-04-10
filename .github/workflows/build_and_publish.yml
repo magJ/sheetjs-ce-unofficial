@@ -2,7 +2,7 @@ name: Build and Publish
 on:
   workflow_call: {}
   push:
-    branches: [master]
+    branches: [test-workflow]
 jobs:
   buildPublish:
     name: Build & Publish
@@ -21,11 +21,9 @@ jobs:
       - name: 'Get latest package version'
         id: 'getVersion'
         run: echo "message=$(jq -r '.version' < sheetjs/package.json)" >> $GITHUB_OUTPUT
+      - name: 'Get latest published package version'
+        id: 'getLatestPublishedVersion'
+        run: cat latest_published >> $GITHUB_OUTPUT
       - run: ./build.sh
-      - run: ./publish.sh
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
-      - run: git submodule foreach --recursive git reset --hard
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: 'Publish ${{ steps.getVersion.outputs.message }}'
+        if: steps.getVersion.outputs.message != steps.getLatestPublishedVersion.outputs.message
+      - run: echo "test"
