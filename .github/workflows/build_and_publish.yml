@@ -2,7 +2,7 @@ name: Build and Publish
 on:
   workflow_call: {}
   push:
-    branches: [test-workflow]
+    branches: [master]
 jobs:
   buildPublish:
     name: Build & Publish
