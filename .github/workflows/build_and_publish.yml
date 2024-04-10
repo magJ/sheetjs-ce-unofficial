@@ -20,7 +20,7 @@ jobs:
       - run: sudo apt-get install -y pkgdiff
       - name: 'Get latest package version'
         id: 'getVersion'
-        run: >
+        run: |
           echo "package_json_version=$(jq -r '.version' < sheetjs/package.json)" >> $GITHUB_OUTPUT
           echo "latest_published_version=$(cat latest_published.txt)" >> $GITHUB_OUTPUT
       - run: ./build.sh
