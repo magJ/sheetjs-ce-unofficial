@@ -23,7 +23,7 @@ jobs:
         run: echo "message=$(jq -r '.version' < sheetjs/package.json)" >> $GITHUB_OUTPUT
       - name: 'Get latest published package version'
         id: 'getLatestPublishedVersion'
-        run: cat latest_published >> $GITHUB_OUTPUT
+        run: cat latest_published.txt >> $GITHUB_OUTPUT
       - run: ./build.sh
         if: steps.getVersion.outputs.message != steps.getLatestPublishedVersion.outputs.message
       - run: echo "test"
