@@ -1,4 +1,5 @@
-# Redistribution of SheetJS Community Edition
+[![NPM Version](https://img.shields.io/npm/v/sheetjs-ce-unofficial?logo=npm&logoColor=%23CB3837&labelColor=%23FFF&color=000)](https://www.npmjs.com/package/sheetjs-ce-unofficial)
+# Redistribution of SheetJS Community Edition 
 
 For unspecified reasons, the SheetJS project decided to stop publishing updates to the `xlsx` npm package.  
 
