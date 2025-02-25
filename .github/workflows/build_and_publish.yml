@@ -25,6 +25,12 @@ jobs:
           echo "latest_published_version=$(cat latest_published.txt)" >> $GITHUB_OUTPUT
       - run: ./build.sh
         if: steps.getVersion.outputs.package_json_version != steps.getVersion.outputs.latest_published_version
+      - name: Upload PkgDiff Reports on Failure
+        if: failure()  # Runs only if the previous step fails
+        uses: actions/upload-artifact@v4
+        with:
+          name: pkgdiff_reports
+          path: pkgdiff_reports/
       - run: ./publish.sh
         if: steps.getVersion.outputs.package_json_version != steps.getVersion.outputs.latest_published_version
         env:
